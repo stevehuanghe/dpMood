@@ -47,4 +47,4 @@ if __name__ == '__main__':
         for j in range(dm.num_batch_per_epoch):
             print('epoch: %d, batch: %d'%(dm.cur_epoch, dm.cur_batch))
             batch = dm.get_batch(data)
-            print batch
+            print(batch)

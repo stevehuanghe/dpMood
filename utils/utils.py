@@ -7,7 +7,7 @@ from datetime import datetime
 
 def load_merged_pickle_data(file_name, mode='short'):
     if not os.path.isfile(file_name):
-        print 'file not found:', file_name
+        print('file not found:', file_name)
     data = pickle.load(open(file_name, 'rb'))
     timestamp = data['timestamp']
     merged = data['merged']
@@ -33,7 +33,7 @@ def load_merged_pickle_data(file_name, mode='short'):
 
 def load_pickle_data(file_name):
     if not os.path.isfile(file_name):
-        print 'file not found:', file_name
+        print('file not found:', file_name)
     data, label, timestamp = pickle.load(open(file_name, 'rb'))
     return data, label, timestamp
 
@@ -64,23 +64,7 @@ def parse_labels(labels, multi_class=False):
         ymrs = (labels[i][1] + 0.0)/30.0
         hdrs = (labels[i][1] + 0.0)/30.0
         res.append((hdrs, ymrs))
-        #ymrs = np.log(labels[i][1] + 1.0)
-        # if not multi_class:
-        #     if labels[i][0] >= 8:
-        #         res.append((1.0, ymrs))
-        #     else:
-        #         res.append((0.0, ymrs))
-        # else:
-        #     if labels[i][0] < 8:
-        #         res.append((0.0, ymrs))
-        #     elif 8 <= labels[i][0] < 14:
-        #         res.append((1.0, ymrs))
-        #     elif 14 <= labels[i][0] < 19:
-        #         res.append((2.0, ymrs))
-        #     elif 19 <= labels[i][0] < 23:
-        #         res.append((3.0, ymrs))
-        #     else:
-        #         res.append((4.0, ymrs))
+    
     return res
 
 
@@ -117,7 +101,7 @@ def load_data_dir(data_dir, ttype='hour_sum', shuffle=False, multi_class=False, 
         timestamp = parse_timestamp(timestamp, ttype=ttype)
         uid_list = [uid for _ in range(len(labels))]
         uid += 1
-        data = zip(accel, alphanum, special, labels, timestamp, uid_list)
+        data = list(zip(accel, alphanum, special, labels, timestamp, uid_list))
         if no_split:
             data_dict[filename] = data
         if shuffle:
@@ -329,4 +313,4 @@ if __name__ == '__main__':
     #load_merged_data_dir('../data')
     data_dir = '/home/hehuang/Datasets/keyboard'
     files = os.listdir(data_dir)
-    print files
+    print(files)

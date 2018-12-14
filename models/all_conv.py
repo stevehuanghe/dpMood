@@ -82,6 +82,6 @@ if __name__ == '__main__':
     net = AllConv()
     dat = Variable(torch.randn(1, 3, 100))
     res = net.forward(dat)
-    print res.size()
+    print(res.size())
 
 

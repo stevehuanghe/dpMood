@@ -18,7 +18,7 @@ os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 result_dir = './results_all/'
-data_dir = '/home/hehuang/Datasets/keyboard'
+data_dir = './data'
 merged_data_dir = '../keyboard_cnn/data'
 checkpoint_dir = './checkpoints/'
 
@@ -43,7 +43,7 @@ else:
 if not os.path.isdir(result_dir):
     os.system('mkdir ' + result_dir)
 
-print 'loading data...'
+print('loading data...')
 train_data_d, test_data_d, num_users = load_data_dir(data_dir=data_dir, ttype='hour_sum', shuffle=False,
                                                      multi_class=False, parse_label=parse_label, with_ctrl=use_ctrl)
 
@@ -93,7 +93,7 @@ def main(model='2cnn_rnn_sin_id', pid=0):
     else:
         criterion = nn.MSELoss()
     optimizer = optim.RMSprop(net.parameters(), lr=learning_rate, weight_decay=0.001)
-    print 'training...'
+    print('training...')
 
     best_epoch = 0
     best_acc = 0
@@ -141,9 +141,9 @@ def main(model='2cnn_rnn_sin_id', pid=0):
         #print 'best: epoch %d, rmse: %f' % (best_epoch, best_rmse)
 
     if mode == 'clf':
-        print 'best: epoch %d, acc: %f, f1: %f'%(best_epoch, best_acc, best_f1)
+        print('best: epoch %d, acc: %f, f1: %f'%(best_epoch, best_acc, best_f1))
     else:
-        print 'best: epoch %d, rmse: %f'%(best_epoch, best_rmse)
+        print('best: epoch %d, rmse: %f'%(best_epoch, best_rmse))
 
     save_log_data(results, log_file)
 
